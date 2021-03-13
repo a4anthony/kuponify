@@ -4,20 +4,16 @@ import generateToken from "../utils/generateToken.js";
 import { validatorErrors } from "../validator.js";
 function userReturnObj(user) {
   return {
-    _id: user._id,
-    name: user.name,
-    email: user.email,
-    isAdmin: user.isAdmin,
-    businessName: user.businessName,
+    user: {
+      _id: user._id,
+      name: user.name,
+      email: user.email,
+      isAdmin: user.isAdmin,
+      businessName: user.businessName,
+    },
     token: generateToken(user._id),
   };
 }
-
-var ValidationErrors = {
-  REQUIRED: "required",
-  NOTVALID: "notvalid",
-  /* ... */
-};
 
 // @description  Login user
 // @route        POST /api/users/login
