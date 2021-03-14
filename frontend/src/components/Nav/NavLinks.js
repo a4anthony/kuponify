@@ -15,8 +15,18 @@ const NavLinks = ({ user, loading, linkClass }) => {
         Home
       </a>
       <a href="/" className={linkClass}>
-        My Kupons
+        Docs
       </a>
+      <a href="/" className={linkClass}>
+        Pricing
+      </a>
+      {user && !loading && (
+        <>
+          <a href="/" className={linkClass}>
+            My Kupons
+          </a>{" "}
+        </>
+      )}{" "}
       {!user && !loading && (
         <>
           <a onClick={submitHandler} href="/" className={linkClass}>

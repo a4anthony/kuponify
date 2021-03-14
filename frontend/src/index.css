@@ -17,20 +17,113 @@
 @tailwind utilities;
 
 @layer components {
+  .btn {
+    @apply focus:outline-none;
+  }
+  .default-btn {
+    @apply bg-green-600 hover:bg-green-700 border-2 border-green-600 hover:border-green-700 text-white font-bold py-2 px-6 rounded-lg;
+  }
+  .default-btn-alt {
+    @apply border-2 border-gray-500 hover:border-gray-400 text-gray-500 hover:text-gray-400 text-white font-bold py-2 px-6 rounded-lg;
+  }
   .nav-links {
-    @apply text-gray-300 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium text-center;
+    @apply text-gray-300  hover:text-white block px-3 py-2 rounded-md text-base font-medium text-center;
   }
+
   .nav-links-bg {
-    @apply text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium;
+    @apply text-gray-300  hover:text-white px-3 py-2 rounded-md text-sm font-medium;
   }
+
   .nav-links-bg-active {
     @apply bg-gray-900 text-white px-3 py-2 rounded-md text-sm font-medium;
   }
 
   .nav-links-active {
-    @apply bg-gray-900 text-white block px-3 py-2 rounded-md text-base font-medium text-center;
+    @apply text-white block px-3 py-2 rounded-md text-base font-medium text-center;
   }
+
   .user-menu {
     @apply origin-top-right absolute right-0 mt-2 w-48 rounded-md shadow-lg py-1 bg-white ring-1 ring-black ring-opacity-5 focus:outline-none;
+  }
+
+  .footer-social-icons li {
+    @apply hover:text-gray-200;
+  }
+}
+
+footer {
+  background-color: #484747;
+}
+.h-list li {
+  display: inline;
+}
+.nav-links-active,
+.nav-links-bg-active {
+  background-color: rgba(6, 78, 59, 0.5);
+}
+.nav-links-bg:hover,
+.nav-links:hover {
+  background-color: rgba(6, 78, 59, 0.3);
+}
+.footer-social-icons li {
+  margin-right: 1rem;
+}
+.footer-social-icons li:last-child {
+  margin-right: 0;
+}
+body {
+  background-color: black;
+  font-family: "Nunito", sans-serif !important;
+}
+
+nav {
+  backdrop-filter: blur(5px);
+  background-color: transparent !important;
+}
+
+.header {
+  color: #ffff;
+  background-image: -webkit-linear-gradient(130deg, #16584c, #ffffff 71%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.logo {
+  /*font-family: Helvetica Neue, Helvetica, Arial, sans-serif;*/
+  /*font-size: 6rem;*/
+  /*font-weight:  100;*/
+  /*letter-spacing: 2px;*/
+  /*text-align: center;*/
+  color: #c2efe7;
+  /*background-image: -webkit-linear-gradient(92deg, #16584c, #ffffff);*/
+  /*-webkit-background-clip: text;*/
+  /*-webkit-text-fill-color: transparent;*/
+  /*-webkit-animation: hue 10s infinite linear;*/
+}
+.user-icon {
+  background: rgb(175, 164, 54);
+  background: linear-gradient(
+    90deg,
+    rgba(175, 164, 54, 1) 0%,
+    rgba(121, 34, 9, 1) 45%,
+    rgba(255, 0, 97, 1) 100%
+  );
+}
+
+@keyframes hue {
+  from {
+    -webkit-filter: hue-rotate(0deg);
+  }
+  to {
+    -webkit-filter: hue-rotate(-360deg);
+  }
+}
+
+@-webkit-keyframes hue {
+  from {
+    -webkit-filter: hue-rotate(0deg);
+  }
+  to {
+    -webkit-filter: hue-rotate(-360deg);
   }
 }
