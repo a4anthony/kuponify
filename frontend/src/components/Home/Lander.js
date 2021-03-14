@@ -3,7 +3,7 @@ const Lander = ({ getStarted, goToDocumentation }) => {
     <div className="container mx-auto  bg-black py-16 md:py-24">
       <div className="grid grid-cols-1">
         <div className="my-auto text-center">
-          <span className="header text-white text-5xl md:text-6xl block mb-16 md:px-20 lg:px-16 xl:px-32 2xl:px-96">
+          <span className="header text-white text-5xl md:text-6xl block mb-16 px-12 md:px-20 lg:px-16 xl:px-32 2xl:px-96">
             Create and manage discount coupons for your online store.
           </span>
           <button

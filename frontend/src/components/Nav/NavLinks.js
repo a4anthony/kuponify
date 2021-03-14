@@ -1,40 +1,66 @@
-import { login } from "../../actions/userActions";
-import { useDispatch } from "react-redux";
+import { Link } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 
 const NavLinks = ({ user, loading, linkClass }) => {
-  const dispatch = useDispatch();
-
+  // const dispatch = useDispatch();
+  //
   const submitHandler = (e) => {
-    e.preventDefault();
-    dispatch(login("user1@example.com", "12345678"));
+    console.log(e.target.classList);
+    e.target.classList.add("nav-links-active");
+    // dispatch(login("user1@example.com", "12345678"));
   };
   return (
     <>
       {/*Current: "bg-gray-900 text-white", Default: "text-gray-300 hover:bg-gray-700 hover:text-white" */}
-      <a href="/" className="nav-links-active">
+      <NavLink
+        exact
+        to="/"
+        activeClassName="nav-links-active"
+        className={linkClass}
+      >
         Home
-      </a>
-      <a href="/" className={linkClass}>
+      </NavLink>{" "}
+      <NavLink
+        to="/documentation"
+        activeClassName="nav-links-active"
+        className={linkClass}
+      >
         Docs
-      </a>
-      <a href="/" className={linkClass}>
+      </NavLink>{" "}
+      <NavLink
+        to="/pricing"
+        activeClassName="nav-links-active"
+        className={linkClass}
+      >
         Pricing
-      </a>
+      </NavLink>
       {user && !loading && (
         <>
-          <a href="/" className={linkClass}>
+          <NavLink
+            to="/kupons"
+            activeClassName="nav-links-active"
+            className={linkClass}
+          >
             My Kupons
-          </a>{" "}
+          </NavLink>
         </>
       )}{" "}
       {!user && !loading && (
         <>
-          <a onClick={submitHandler} href="/" className={linkClass}>
+          <NavLink
+            to="/login"
+            activeClassName="nav-links-active"
+            className={linkClass}
+          >
             Login
-          </a>
-          <a href="/" className={linkClass}>
+          </NavLink>
+          <Link
+            to="/register"
+            activeClassName="nav-links-active"
+            className={linkClass}
+          >
             Register
-          </a>
+          </Link>
         </>
       )}
     </>

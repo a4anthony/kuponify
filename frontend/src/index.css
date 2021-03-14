@@ -39,7 +39,7 @@
   }
 
   .nav-links-active {
-    @apply text-white block px-3 py-2 rounded-md text-base font-medium text-center;
+    @apply text-white block px-3 py-2 rounded-md text-sm font-medium text-center;
   }
 
   .user-menu {
@@ -48,6 +48,17 @@
 
   .footer-social-icons li {
     @apply hover:text-gray-200;
+  }
+
+  /*Forms*/
+  .label {
+    @apply block mb-2 text-xs uppercase font-bold text-gray-600;
+  }
+  .form-error {
+    @apply text-red-500 absolute left-0 top-16 block mt-2 text-sm;
+  }
+  input {
+    @apply w-full px-3 py-2 placeholder-gray-300 border border-gray-300 rounded-md focus:outline-none focus:ring focus:ring-gray-200 focus:border-gray-300;
   }
 }
 
