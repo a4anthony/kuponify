@@ -6,6 +6,9 @@ import {
   USER_LOGIN_REQUEST,
   USER_LOGIN_SUCCESS,
   USER_LOGOUT,
+  USER_REGISTER_FAIL,
+  USER_REGISTER_REQUEST,
+  USER_REGISTER_SUCCESS,
 } from "../constants/userConstant";
 
 export const userLoginReducer = (state = {}, action) => {
@@ -38,6 +41,23 @@ export const userInfoReducer = (state = {}, action) => {
       return { loading: false, error: action.payload, user: null };
     case USER_LOGOUT:
       return { user: null };
+    default:
+      return state;
+  }
+};
+
+export const userRegisterReducer = (state = {}, action) => {
+  switch (action.type) {
+    case USER_REGISTER_REQUEST:
+      return { loading: true };
+    case USER_REGISTER_SUCCESS:
+      return {
+        loading: false,
+        userInfo: action.payload.user,
+        token: action.payload.token,
+      };
+    case USER_REGISTER_FAIL:
+      return { loading: false, error: action.payload };
     default:
       return state;
   }

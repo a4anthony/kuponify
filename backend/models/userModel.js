@@ -7,7 +7,7 @@ const userSchema = mongoose.Schema(
       type: String,
       required: [true, "Enter you name"],
     },
-    businessName: {
+    accessToken: {
       type: String,
       required: true,
     },
@@ -26,6 +26,11 @@ const userSchema = mongoose.Schema(
       required: true,
       default: false,
     },
+    isActive: {
+      type: Boolean,
+      required: true,
+      default: true,
+    },
     emailVerifiedAt: {
       type: Date,
       required: false,
@@ -40,9 +45,6 @@ const userSchema = mongoose.Schema(
 userSchema.methods.matchPassword = async function (enteredPassword) {
   return await bcrypt.compare(enteredPassword, this.password);
 };
-
-var ValidationError = mongoose.Error.ValidationError;
-var ValidatorError = mongoose.Error.ValidatorError;
 
 userSchema.pre("save", async function (next) {
   if (!this.isModified("password")) {

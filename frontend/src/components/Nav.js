@@ -36,7 +36,7 @@ const Nav = () => {
   return (
     // This example requires Tailwind CSS v2.0
     <nav
-      className="bg-black sticky top-0"
+      className="bg-black sticky top-0 z-10"
       style={{ borderBottom: "1px solid", borderColor: "rgb(43 42 42)" }}
     >
       <div className="container">

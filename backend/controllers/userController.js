@@ -2,6 +2,7 @@ import asyncHandler from "express-async-handler";
 import User from "../models/userModel.js";
 import generateToken from "../utils/generateToken.js";
 import { validatorErrors } from "../validator.js";
+import generateAccessToken from "../utils/generateAccessToken.js";
 function userReturnObj(user) {
   return {
     user: {
@@ -9,7 +10,6 @@ function userReturnObj(user) {
       name: user.name,
       email: user.email,
       isAdmin: user.isAdmin,
-      businessName: user.businessName,
     },
     token: generateToken(user._id),
   };
@@ -33,10 +33,13 @@ const loginUser = asyncHandler(async (req, res) => {
 // @route        POST /api/users/register
 // @access       Public
 const registerUser = asyncHandler(async (req, res) => {
-  const { name, email, password, businessName } = req.body;
+  const { name, email, password } = req.body;
+  const accessToken = generateAccessToken(email);
   const userExists = await User.findOne({ email });
   if (userExists) {
-    res.status(422).send({ email: { message: "The email is already taken" } });
+    res
+      .status(422)
+      .send({ message: { email: { message: "The email is already taken" } } });
   }
 
   try {
@@ -44,11 +47,11 @@ const registerUser = asyncHandler(async (req, res) => {
       name,
       email,
       password,
-      businessName,
+      accessToken,
     });
     res.json(userReturnObj(user));
   } catch (err) {
-    res.status(422).send(validatorErrors(err));
+    res.status(422).send({ message: validatorErrors(err) });
   }
 });
 

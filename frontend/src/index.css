@@ -55,7 +55,7 @@
     @apply block mb-2 text-xs uppercase font-bold text-gray-600;
   }
   .form-error {
-    @apply text-red-500 absolute left-0 top-16 block mt-2 text-sm;
+    @apply text-red-500 absolute left-0 top-16 block mt-1 text-sm;
   }
   input {
     @apply w-full px-3 py-2 placeholder-gray-300 border border-gray-300 rounded-md focus:outline-none focus:ring focus:ring-gray-200 focus:border-gray-300;
@@ -88,8 +88,9 @@ body {
 }
 
 nav {
-  backdrop-filter: blur(5px);
+  backdrop-filter: blur(10px);
   background-color: transparent !important;
+  /*background-color: black !important;*/
 }
 
 .header {
@@ -137,4 +138,16 @@ nav {
   to {
     -webkit-filter: hue-rotate(-360deg);
   }
+}
+
+.switch-wrapper {
+  position: relative;
+  min-height: 100vh;
+}
+
+.switch-wrapper > div {
+  position: relative;
+  left: 0;
+  right: 0;
+  /*min-height: 100vh;*/
 }
