@@ -3,6 +3,8 @@ import User from "../models/userModel.js";
 import generateToken from "../utils/generateToken.js";
 import { validatorErrors } from "../validator.js";
 import generateAccessToken from "../utils/generateAccessToken.js";
+import mail from "../utils/mailgun.js";
+import token from "../utils/generateLocalToken.js";
 function userReturnObj(user) {
   return {
     user: {
@@ -41,16 +43,23 @@ const registerUser = asyncHandler(async (req, res) => {
       .status(422)
       .send({ message: { email: { message: "The email is already taken" } } });
   }
-
+  let localToken = "";
   try {
+    await User.count({}, function (err, count) {
+      localToken = token(Number(count) + 1);
+    });
     const user = await User.create({
       name,
       email,
       password,
       accessToken,
+      localToken,
     });
+
+    mail.emailVerification(email, localToken);
     res.json(userReturnObj(user));
   } catch (err) {
+    console.log(err);
     res.status(422).send({ message: validatorErrors(err) });
   }
 });

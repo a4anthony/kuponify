@@ -7,12 +7,19 @@ import connectDB from "./config/db.js";
 import userRoutes from "./routes/userRoutes.js";
 import { errorHandler, notFound } from "./middleware/errorMiddleware.js";
 import cookieRoutes from "./routes/cookieRoutes.js";
+import mailRoutes from "./routes/mailRoutes.js";
+import path from "path";
+import morgan from "morgan";
 
 dotenv.config();
 
 connectDB();
 
 const app = express();
+
+if (process.env.NODE_ENV === "development") {
+  app.use(morgan("dev"));
+}
 
 app.use(express.json());
 
@@ -25,9 +32,17 @@ app.use(
   })
 );
 app.use(cookieParser());
+
+//Tell express to fetch files from the /js directory
+const __dirname = path.resolve();
+app.use(express.static(__dirname + "/js"));
+app.set("view engine", "jade");
+
 // Routes registration
 app.use("/api/users", userRoutes);
 app.use("/api/cookie", cookieRoutes);
+app.use("/api/mail", mailRoutes);
+
 // middleware
 app.use(notFound);
 app.use(errorHandler);
