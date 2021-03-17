@@ -17,6 +17,7 @@ import Footer from "./components/Footer";
 import LoginScreen from "./screens/LoginScreen";
 import RegisterScreen from "./screens/RegisterScreen";
 import PrivateRoute from "./components/Helpers/PrivateRoute";
+import EmailVerificationScreen from "./screens/EmailVerificationScreen";
 axios.defaults.withCredentials = true;
 
 function _ScrollToTop(props) {
@@ -45,6 +46,10 @@ function App() {
         >
           <PrivateRoute path="/login" component={LoginScreen} exact />
           <PrivateRoute path="/register" component={RegisterScreen} exact />
+          <Route
+            path="/email-verification"
+            component={EmailVerificationScreen}
+          />
           <Route path="/" component={HomeScreen} exact />
         </AnimatedSwitch>
         <Footer />

@@ -12,6 +12,7 @@ function userReturnObj(user) {
       name: user.name,
       email: user.email,
       isAdmin: user.isAdmin,
+      emailVerifiedAt: user.emailVerifiedAt,
     },
     token: generateToken(user._id),
   };
@@ -64,4 +65,35 @@ const registerUser = asyncHandler(async (req, res) => {
   }
 });
 
-export { loginUser, registerUser };
+// @description  Verify user email
+// @route        POST /api/users/email-verification
+// @access       Public
+const verifyEmail = asyncHandler(async (req, res) => {
+  const { email, token } = req.body;
+  const userExists = await User.findOne({ email });
+  if (!userExists) {
+    res
+      .status(422)
+      .send({ message: { email: { message: "Invalid credentials" } } });
+  }
+  if (!token) {
+    res
+      .status(422)
+      .send({ message: { token: { message: "User token is required" } } });
+  } else if (userExists.localToken !== token) {
+    res
+      .status(422)
+      .send({ message: { token: { message: "Tokens do not match" } } });
+  } else {
+    try {
+      userExists.emailVerifiedAt = Date.now();
+      const updatedUser = await userExists.save();
+      res.json(userReturnObj(updatedUser));
+    } catch (err) {
+      console.log(err);
+      res.status(422).send({ message: validatorErrors(err) });
+    }
+  }
+});
+
+export { loginUser, registerUser, verifyEmail };

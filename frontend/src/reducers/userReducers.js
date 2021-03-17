@@ -9,6 +9,9 @@ import {
   USER_REGISTER_FAIL,
   USER_REGISTER_REQUEST,
   USER_REGISTER_SUCCESS,
+  USER_VERIFY_EMAIL_FAIL,
+  USER_VERIFY_EMAIL_REQUEST,
+  USER_VERIFY_EMAIL_SUCCESS,
 } from "../constants/userConstant";
 
 export const userLoginReducer = (state = {}, action) => {
@@ -57,6 +60,22 @@ export const userRegisterReducer = (state = {}, action) => {
         token: action.payload.token,
       };
     case USER_REGISTER_FAIL:
+      return { loading: false, error: action.payload };
+    default:
+      return state;
+  }
+};
+
+export const userVerifyEmailReducer = (state = {}, action) => {
+  switch (action.type) {
+    case USER_VERIFY_EMAIL_REQUEST:
+      return { loading: true };
+    case USER_VERIFY_EMAIL_SUCCESS:
+      return {
+        loading: false,
+        verified: true,
+      };
+    case USER_VERIFY_EMAIL_FAIL:
       return { loading: false, error: action.payload };
     default:
       return state;

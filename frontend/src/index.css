@@ -57,9 +57,16 @@
   .form-error {
     @apply text-red-500 absolute left-0 top-16 block mt-1 text-sm;
   }
+  .error-text {
+    @apply text-red-500 block mt-1 text-sm;
+  }
   input {
     @apply w-full px-3 py-2 placeholder-gray-300 border border-gray-300 rounded-md focus:outline-none focus:ring focus:ring-gray-200 focus:border-gray-300;
   }
+}
+
+.min-h-screen-90 {
+  min-height: 90vh;
 }
 
 footer {
