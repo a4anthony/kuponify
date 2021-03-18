@@ -61,7 +61,10 @@ const LoginScreen = ({ history, location }) => {
           </div>
           <div className="mb-4">
             <p className="text-sm text-right text-gray-600" id="result">
-              <Link to="/register" className="text-red-500 hover:text-red-400">
+              <Link
+                to="/forgot-password"
+                className="text-red-500 hover:text-red-400"
+              >
                 Forgot Password?
               </Link>
             </p>

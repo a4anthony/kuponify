@@ -5,6 +5,7 @@ import { validatorErrors } from "../validator.js";
 import generateAccessToken from "../utils/generateAccessToken.js";
 import mail from "../utils/mailgun.js";
 import token from "../utils/generateLocalToken.js";
+import jwt from "jsonwebtoken";
 function userReturnObj(user) {
   return {
     user: {
@@ -14,7 +15,7 @@ function userReturnObj(user) {
       isAdmin: user.isAdmin,
       emailVerifiedAt: user.emailVerifiedAt,
     },
-    token: generateToken(user._id),
+    token: generateToken(user._id, "30d"),
   };
 }
 
@@ -66,7 +67,7 @@ const registerUser = asyncHandler(async (req, res) => {
 });
 
 // @description  Verify user email
-// @route        POST /api/users/email-verification
+// @route        PUT /api/users/email-verification
 // @access       Public
 const verifyEmail = asyncHandler(async (req, res) => {
   const { email, token } = req.body;
@@ -96,4 +97,74 @@ const verifyEmail = asyncHandler(async (req, res) => {
   }
 });
 
-export { loginUser, registerUser, verifyEmail };
+// @description  Reset password mail
+// @route        POST /api/users/password-reset
+// @access       Public
+const sendPasswordResetMail = asyncHandler(async (req, res) => {
+  const { email } = req.body;
+  const userExists = await User.findOne({ email });
+  if (!userExists) {
+    res
+      .status(422)
+      .send({ message: { email: { message: "Invalid credentials" } } });
+  }
+
+  try {
+    const token = generateToken(userExists._id, "30m");
+    await mail.passwordReset(email, token);
+    console.log(token);
+    res.json({
+      message: "Password reset link sent",
+    });
+  } catch (err) {
+    console.log(err);
+  }
+});
+
+// @description  Password Reset
+// @route        PUT /api/users/password-reset
+// @access       Public
+const resetPassword = asyncHandler(async (req, res) => {
+  const { email, token, password } = req.body;
+  const userExists = await User.findOne({ email });
+  let valid = false;
+  jwt.verify(token, process.env.JWT_SECRET, (err, verifiedJwt) => {
+    if (!err) {
+      valid = true;
+    } else {
+      console.log(err);
+    }
+  });
+
+  if (!userExists) {
+    res
+      .status(422)
+      .send({ message: { email: { message: "Invalid credentials" } } });
+  }
+  if (!token) {
+    res
+      .status(422)
+      .send({ message: { token: { message: "User token is required" } } });
+  } else if (!valid) {
+    res
+      .status(422)
+      .send({ message: { token: { message: "Tokens is invalid" } } });
+  } else {
+    try {
+      userExists.password = password;
+      const updatedUser = await userExists.save();
+      res.json(userReturnObj(updatedUser));
+    } catch (err) {
+      console.log(err);
+      res.status(422).send({ message: validatorErrors(err) });
+    }
+  }
+});
+
+export {
+  loginUser,
+  registerUser,
+  verifyEmail,
+  sendPasswordResetMail,
+  resetPassword,
+};
