@@ -4,6 +4,7 @@ import { faCircleNotch } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useDispatch, useSelector } from "react-redux";
 import { verifyEmail } from "../actions/userActions";
+import Meta from "../components/Meta";
 const spinner = <FontAwesomeIcon className={"fa-spin"} icon={faCircleNotch} />;
 
 const EmailVerificationScreen = ({ location, history }) => {
@@ -30,20 +31,23 @@ const EmailVerificationScreen = ({ location, history }) => {
   }, [history, email, token, dispatch, verified]);
 
   return (
-    <FormContainer>
-      <div className="text-center">
-        <h5 className="font-bold mb-2 text-dark">
-          Verifying your email address
-        </h5>
-        {error ? (
-          <span className="error-text">
-            An error occcured. Please try again
-          </span>
-        ) : (
-          <span>{spinner}</span>
-        )}
-      </div>
-    </FormContainer>
+    <>
+      <Meta title={"Verify email - Kuponify"} />
+      <FormContainer>
+        <div className="text-center">
+          <h5 className="font-bold mb-2 text-dark">
+            Verifying your email address
+          </h5>
+          {error ? (
+            <span className="error-text">
+              An error occcured. Please try again
+            </span>
+          ) : (
+            <span>{spinner}</span>
+          )}
+        </div>
+      </FormContainer>
+    </>
   );
 };
 

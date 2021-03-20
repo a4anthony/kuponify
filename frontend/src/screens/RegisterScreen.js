@@ -6,6 +6,7 @@ import { useEffect, useState } from "react";
 import { faCircleNotch } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEye } from "@fortawesome/free-solid-svg-icons";
+import Meta from "../components/Meta";
 const eye = <FontAwesomeIcon icon={faEye} />;
 
 const spinner = <FontAwesomeIcon className={"fa-spin"} icon={faCircleNotch} />;
@@ -54,6 +55,7 @@ const RegisterScreen = ({ location, history }) => {
   };
   return (
     <>
+      <Meta title={"Register - Kuponify"} />
       <FormContainer title={"Register"}>
         <form onSubmit={submitHandler}>
           <div className="mb-7 relative">

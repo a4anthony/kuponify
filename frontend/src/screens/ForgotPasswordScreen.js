@@ -5,6 +5,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { faCircleNotch } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { passwordResetMail } from "../actions/userActions";
+import Meta from "../components/Meta";
 
 const spinner = <FontAwesomeIcon className={"fa-spin"} icon={faCircleNotch} />;
 
@@ -28,6 +29,7 @@ const ForgotPasswordScreen = () => {
   };
   return (
     <>
+      <Meta title={"Forgot Password - Kuponify"} />
       <FormContainer title={"Password Reset"}>
         <form onSubmit={submitHandler}>
           <div className="mb-7 relative">

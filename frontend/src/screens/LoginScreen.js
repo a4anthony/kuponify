@@ -5,6 +5,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useDispatch, useSelector } from "react-redux";
 import { login } from "../actions/userActions";
 import { Link } from "react-router-dom";
+import Meta from "../components/Meta";
 const spinner = <FontAwesomeIcon className={"fa-spin"} icon={faCircleNotch} />;
 
 const LoginScreen = ({ history, location }) => {
@@ -28,6 +29,7 @@ const LoginScreen = ({ history, location }) => {
   };
   return (
     <>
+      <Meta title={"Login - Kuponify"} />
       <FormContainer title={"Login"}>
         <form onSubmit={submitHandler}>
           <div className="mb-7 relative">

@@ -6,6 +6,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEye } from "@fortawesome/free-solid-svg-icons";
 import { passwordReset } from "../actions/userActions";
 import { Link } from "react-router-dom";
+import Meta from "../components/Meta";
 const eye = <FontAwesomeIcon icon={faEye} />;
 const spinner = <FontAwesomeIcon className={"fa-spin"} icon={faCircleNotch} />;
 
@@ -43,6 +44,7 @@ const PasswordResetScreen = ({ location }) => {
 
   return (
     <>
+      <Meta title={"Password Reset - Kuponify"} />
       <FormContainer title={"Password Reset"}>
         <form onSubmit={submitHandler}>
           <div className="mb-7 relative">
