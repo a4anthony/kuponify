@@ -57,6 +57,9 @@
   .form-error {
     @apply text-red-500 absolute left-0 top-16 block mt-1 text-sm;
   }
+  .form-success {
+    @apply text-green-700 absolute left-0 top-16 block mt-1 text-sm;
+  }
   .error-text {
     @apply text-red-500 block mt-1 text-sm;
   }

@@ -8,6 +8,12 @@ import {
   USER_LOGIN_REQUEST,
   USER_LOGIN_SUCCESS,
   USER_LOGOUT,
+  USER_PASSWORD_RESET_FAIL,
+  USER_PASSWORD_RESET_MAIL_FAIL,
+  USER_PASSWORD_RESET_MAIL_REQUEST,
+  USER_PASSWORD_RESET_MAIL_SUCCESS,
+  USER_PASSWORD_RESET_REQUEST,
+  USER_PASSWORD_RESET_SUCCESS,
   USER_REGISTER_FAIL,
   USER_REGISTER_REQUEST,
   USER_REGISTER_SUCCESS,
@@ -164,6 +170,70 @@ export const verifyEmail = (email, token) => async (dispatch) => {
   } catch (error) {
     dispatch({
       type: USER_VERIFY_EMAIL_FAIL,
+      payload:
+        error.response && error.response.data.message
+          ? error.response.data.message
+          : error.message,
+    });
+  }
+};
+
+export const passwordResetMail = (email) => async (dispatch) => {
+  try {
+    dispatch({
+      type: USER_PASSWORD_RESET_MAIL_REQUEST,
+    });
+    const config = {
+      headers: {
+        "Content-Type": "application/json",
+      },
+    };
+
+    const { data } = await axios.post(
+      "/api/users/password-reset",
+      { email },
+      config
+    );
+
+    dispatch({
+      type: USER_PASSWORD_RESET_MAIL_SUCCESS,
+      payload: data,
+    });
+  } catch (error) {
+    dispatch({
+      type: USER_PASSWORD_RESET_MAIL_FAIL,
+      payload:
+        error.response && error.response.data.message
+          ? error.response.data.message
+          : error.message,
+    });
+  }
+};
+
+export const passwordReset = (email, token, password) => async (dispatch) => {
+  try {
+    dispatch({
+      type: USER_PASSWORD_RESET_REQUEST,
+    });
+    const config = {
+      headers: {
+        "Content-Type": "application/json",
+      },
+    };
+
+    const { data } = await axios.put(
+      "/api/users/password-reset",
+      { email, token, password },
+      config
+    );
+
+    dispatch({
+      type: USER_PASSWORD_RESET_SUCCESS,
+      payload: data,
+    });
+  } catch (error) {
+    dispatch({
+      type: USER_PASSWORD_RESET_FAIL,
       payload:
         error.response && error.response.data.message
           ? error.response.data.message

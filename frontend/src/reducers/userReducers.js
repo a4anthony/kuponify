@@ -6,6 +6,12 @@ import {
   USER_LOGIN_REQUEST,
   USER_LOGIN_SUCCESS,
   USER_LOGOUT,
+  USER_PASSWORD_RESET_FAIL,
+  USER_PASSWORD_RESET_MAIL_FAIL,
+  USER_PASSWORD_RESET_MAIL_REQUEST,
+  USER_PASSWORD_RESET_MAIL_SUCCESS,
+  USER_PASSWORD_RESET_REQUEST,
+  USER_PASSWORD_RESET_SUCCESS,
   USER_REGISTER_FAIL,
   USER_REGISTER_REQUEST,
   USER_REGISTER_SUCCESS,
@@ -76,6 +82,38 @@ export const userVerifyEmailReducer = (state = {}, action) => {
         verified: true,
       };
     case USER_VERIFY_EMAIL_FAIL:
+      return { loading: false, error: action.payload };
+    default:
+      return state;
+  }
+};
+
+export const passwordResetMailReducer = (state = {}, action) => {
+  switch (action.type) {
+    case USER_PASSWORD_RESET_MAIL_REQUEST:
+      return { loading: true };
+    case USER_PASSWORD_RESET_MAIL_SUCCESS:
+      return {
+        loading: false,
+        status: true,
+      };
+    case USER_PASSWORD_RESET_MAIL_FAIL:
+      return { loading: false, error: action.payload };
+    default:
+      return state;
+  }
+};
+
+export const passwordResetReducer = (state = {}, action) => {
+  switch (action.type) {
+    case USER_PASSWORD_RESET_REQUEST:
+      return { loading: true };
+    case USER_PASSWORD_RESET_SUCCESS:
+      return {
+        loading: false,
+        status: true,
+      };
+    case USER_PASSWORD_RESET_FAIL:
       return { loading: false, error: action.payload };
     default:
       return state;

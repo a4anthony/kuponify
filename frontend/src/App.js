@@ -19,6 +19,7 @@ import RegisterScreen from "./screens/RegisterScreen";
 import PrivateRoute from "./components/Helpers/PrivateRoute";
 import EmailVerificationScreen from "./screens/EmailVerificationScreen";
 import ForgotPasswordScreen from "./screens/ForgotPasswordScreen";
+import PasswordResetScreen from "./screens/PasswordResetScreen";
 axios.defaults.withCredentials = true;
 
 function _ScrollToTop(props) {
@@ -51,7 +52,14 @@ function App() {
             path="/email-verification"
             component={EmailVerificationScreen}
           />
-          <Route path="/forgot-password" component={ForgotPasswordScreen} />
+          <PrivateRoute
+            path="/forgot-password"
+            component={ForgotPasswordScreen}
+          />
+          <PrivateRoute
+            path="/password-reset"
+            component={PasswordResetScreen}
+          />
           <Route path="/" component={HomeScreen} exact />
         </AnimatedSwitch>
         <Footer />
