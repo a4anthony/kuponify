@@ -20,6 +20,9 @@ import PrivateRoute from "./components/Helpers/PrivateRoute";
 import EmailVerificationScreen from "./screens/EmailVerificationScreen";
 import ForgotPasswordScreen from "./screens/ForgotPasswordScreen";
 import PasswordResetScreen from "./screens/PasswordResetScreen";
+import PricingScreen from "./screens/PricingScreen";
+import StoresScreen from "./screens/StoresScreen";
+import Alert from "./components/Alert";
 axios.defaults.withCredentials = true;
 
 function _ScrollToTop(props) {
@@ -40,6 +43,7 @@ function App() {
     <Router>
       <ScrollToTop>
         <Nav />
+        <Alert />
         <AnimatedSwitch
           atEnter={{ opacity: 0 }}
           atLeave={{ opacity: 0 }}
@@ -60,6 +64,8 @@ function App() {
             path="/password-reset"
             component={PasswordResetScreen}
           />
+          <Route path="/stores" component={StoresScreen} />
+          <Route path="/pricing" component={PricingScreen} />
           <Route path="/" component={HomeScreen} exact />
         </AnimatedSwitch>
         <Footer />

@@ -9,6 +9,7 @@ import {
   userRegisterReducer,
   userVerifyEmailReducer,
 } from "./reducers/userReducers";
+import { setAlertReducer } from "./reducers/alertReducers";
 
 const reducer = combineReducers({
   userLogin: userLoginReducer,
@@ -17,6 +18,7 @@ const reducer = combineReducers({
   userVerifyEmail: userVerifyEmailReducer,
   passwordResetMail: passwordResetMailReducer,
   passwordReset: passwordResetReducer,
+  setAlert: setAlertReducer,
 });
 
 const userInfoFromStorage = localStorage.getItem("userInfo")

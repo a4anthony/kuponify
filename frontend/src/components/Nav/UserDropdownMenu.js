@@ -29,7 +29,6 @@ const UserDropdownMenu = ({ open, hideUserMenu, userMenuButtonRef }) => {
           !userMenuButtonRef.current.contains(event.target)
         ) {
           hideUserMenu(open);
-          console.log(userMenuButtonRef);
         }
       }
 
