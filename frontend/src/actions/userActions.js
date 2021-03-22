@@ -93,7 +93,13 @@ export const user = () => async (dispatch) => {
   }
 };
 
-export const logout = () => (dispatch) => {
+export const logout = () => async (dispatch) => {
+  const config = {
+    headers: {
+      "Content-Type": "application/json",
+    },
+  };
+  await axios.get(`/api/cookie/delete`, config);
   localStorage.removeItem("userInfo");
   dispatch({
     type: USER_LOGOUT,

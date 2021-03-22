@@ -40,7 +40,7 @@ const Modal = ({ show, toggleModal, children }) => {
   return (
     <>
       <div ref={modalRef} className={show ? " modal" : " modal"}>
-        <div className="flex items-end justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0">
+        <div className="flex items-center justify-center min-h-screen px-4 text-center sm:block">
           {/*Background overlay, show/hide based on modal state.*/}
 
           {/*Entering: "ease-out duration-300"*/}

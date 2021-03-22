@@ -23,8 +23,33 @@ import PasswordResetScreen from "./screens/PasswordResetScreen";
 import PricingScreen from "./screens/PricingScreen";
 import StoresScreen from "./screens/StoresScreen";
 import Alert from "./components/Alert";
-axios.defaults.withCredentials = true;
+import { logout } from "./actions/userActions";
+import store from "./store";
 
+axios.defaults.withCredentials = true;
+// axios.interceptors.response.use(
+//   (next) => {
+//     return Promise.resolve(next);
+//   },
+//   function (error) {
+//     console.log("logout top");
+//     if (error) {
+//       console.log("logout error true");
+//       console.log(error.config);
+//       const originalRequest = error.config;
+//       if (
+//         error.response.status === 401 &&
+//         !originalRequest._retry &&
+//         originalRequest.url !== "/api/cookie/get"
+//       ) {
+//         originalRequest._retry = true;
+//         // store.dispatch(logout());
+//       }
+//
+//       return Promise.reject(error);
+//     }
+//   }
+// );
 function _ScrollToTop(props) {
   const { pathname } = useLocation();
   useEffect(() => {
@@ -64,7 +89,7 @@ function App() {
             path="/password-reset"
             component={PasswordResetScreen}
           />
-          <Route path="/stores" component={StoresScreen} />
+          <PrivateRoute path="/stores" component={StoresScreen} auth={true} />
           <Route path="/pricing" component={PricingScreen} />
           <Route path="/" component={HomeScreen} exact />
         </AnimatedSwitch>

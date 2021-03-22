@@ -21,8 +21,17 @@
     @apply focus:outline-none;
   }
   .default-btn {
-    @apply bg-green-600 hover:bg-green-700 border-2 border-green-600 hover:border-green-700 text-white font-bold py-2 px-6 rounded-lg;
+    @apply bg-green-600 hover:bg-green-700  border-2 border-green-600 hover:border-green-700 text-white font-bold py-2 px-6 rounded-lg;
   }
+
+  .edit-store-btn {
+    @apply bg-blue-400 hover:bg-blue-500 border-2 border-blue-400 hover:border-blue-500 text-white  py-1 px-5 rounded-lg;
+  }
+
+  .crete-coupon-btn {
+    @apply bg-gray-600 hover:bg-gray-700 border-2 border-gray-600 hover:border-gray-700 text-white  py-1 px-5 rounded-lg;
+  }
+
   .default-btn-alt {
     @apply border-2 border-gray-500 hover:border-gray-400 text-gray-500 hover:text-gray-400 text-white font-bold py-2 px-6 rounded-lg;
   }
@@ -70,7 +79,7 @@
 
   /*Modals*/
   .modal-content {
-    @apply inline-block align-bottom bg-white rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg sm:w-full;
+    @apply inline-block align-bottom bg-white rounded-lg text-left overflow-hidden shadow-xl transform transition-all w-full py-2 sm:align-middle sm:max-w-lg sm:w-full;
   }
   .modal-backdrop {
     @apply fixed inset-0 transition-opacity;
@@ -86,7 +95,7 @@
 }
 
 .z--1 {
-  z-index: -1;
+  z-index: -1 !important;
 }
 textarea {
   resize: none;

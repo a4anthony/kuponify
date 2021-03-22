@@ -2,7 +2,7 @@ import asyncHandler from "express-async-handler";
 import User from "../models/userModel.js";
 import jwt from "jsonwebtoken";
 
-function userReturnObj(user) {
+function userReturnObj(user, token) {
   return {
     user: {
       _id: user._id,
@@ -11,6 +11,7 @@ function userReturnObj(user) {
       isAdmin: user.isAdmin,
       businessName: user.businessName,
     },
+    token,
   };
 }
 
@@ -37,7 +38,7 @@ const getUser = asyncHandler(async (req, res) => {
     const user = await User.findById(_id);
     console.log(user);
     if (user) {
-      res.json(userReturnObj(user));
+      res.json(userReturnObj(user, parsedCookies["_.token"]));
     } else {
       res.status(401).send("Invalid credentials");
     }

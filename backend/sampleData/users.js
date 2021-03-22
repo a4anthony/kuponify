@@ -20,10 +20,13 @@ function createUser() {
     const name = `${namePrefix[prefixVal]} ${firstName[firstNameVal]} ${lastName[lastNameVal]}`;
     users.push({
       name: `${name}`,
-      businessName: `Business by ${name}`,
       email: `user${i}@example.com`,
+      accessToken: `accessToken${i}`,
+      localToken: `localToken${i}`,
       password: bcrypt.hashSync("12345678", 10),
       isAdmin: bool[getRandomIntInclusive(0, 1)],
+      isActive: true,
+      emailVerifiedAt: null,
     });
   }
   return users;

@@ -10,6 +10,7 @@ import {
   userVerifyEmailReducer,
 } from "./reducers/userReducers";
 import { setAlertReducer } from "./reducers/alertReducers";
+import { addStoreReducer, getStoresReducer } from "./reducers/storeReducers";
 
 const reducer = combineReducers({
   userLogin: userLoginReducer,
@@ -19,6 +20,8 @@ const reducer = combineReducers({
   passwordResetMail: passwordResetMailReducer,
   passwordReset: passwordResetReducer,
   setAlert: setAlertReducer,
+  addStore: addStoreReducer,
+  getStores: getStoresReducer,
 });
 
 const userInfoFromStorage = localStorage.getItem("userInfo")

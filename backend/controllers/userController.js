@@ -6,6 +6,7 @@ import generateAccessToken from "../utils/generateAccessToken.js";
 import mail from "../utils/mailgun.js";
 import token from "../utils/generateLocalToken.js";
 import jwt from "jsonwebtoken";
+import Store from "../models/storeModel.js";
 function userReturnObj(user) {
   return {
     user: {
@@ -56,6 +57,11 @@ const registerUser = asyncHandler(async (req, res) => {
       password,
       accessToken,
       localToken,
+    });
+
+    await Store.create({
+      user: user._id,
+      stores: [],
     });
 
     mail.emailVerification(email, localToken);

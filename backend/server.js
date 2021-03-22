@@ -10,6 +10,7 @@ import cookieRoutes from "./routes/cookieRoutes.js";
 import mailRoutes from "./routes/mailRoutes.js";
 import path from "path";
 import morgan from "morgan";
+import storeRoutes from "./routes/storeRoutes.js";
 
 dotenv.config();
 
@@ -42,6 +43,7 @@ app.set("view engine", "jade");
 app.use("/api/users", userRoutes);
 app.use("/api/cookie", cookieRoutes);
 app.use("/api/mail", mailRoutes);
+app.use("/api/stores", storeRoutes);
 
 // middleware
 app.use(notFound);

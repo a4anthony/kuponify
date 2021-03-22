@@ -30,7 +30,7 @@ const Alert = () => {
       className={
         alert
           ? "delay-50 ease-out duration-300 opacity-100 translate-y-0 sm:scale-100 "
-          : "ease-in duration-200 opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
+          : "ease-in duration-200 opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95 z--1"
       }
     >
       <div className="alert flex flex-row items-center  mb-7 bg-green-200 p-5 rounded border-b-2 border-green-300">

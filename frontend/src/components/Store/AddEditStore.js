@@ -1,12 +1,61 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { addStore, getStores } from "../../actions/storeActions";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faCircleNotch } from "@fortawesome/free-solid-svg-icons";
+import { setAlert } from "../../actions/alertActions";
+
+const spinner = <FontAwesomeIcon className={"fa-spin"} icon={faCircleNotch} />;
 
 const AddEditStore = ({ toggleModal }) => {
-  const [store, setStore] = useState("");
+  const [name, setName] = useState("");
+  const [briefDescription, setBriefDescription] = useState("");
+  const dispatch = useDispatch();
 
+  const addStoreInfo = useSelector((state) => state.addStore);
+  const { stores, loading, error, success } = addStoreInfo;
+
+  const [nameError, setNameError] = useState("");
+  const [briefDescriptionError, setBriefDescriptionError] = useState("");
+
+  useEffect(() => {
+    if (!loading && error && error.store.name && error.store.name.message) {
+      setNameError(error.store.name.message);
+    } else {
+      setNameError("");
+    }
+    if (
+      !loading &&
+      error &&
+      error.store.briefDescription &&
+      error.store.briefDescription.message
+    ) {
+      setBriefDescriptionError(error.store.briefDescription.message);
+    } else {
+      setBriefDescriptionError("");
+    }
+    if (success) {
+      dispatch(getStores());
+      toggleModal();
+      setTimeout(function () {
+        dispatch(setAlert({ msg: "fjfdjnngj" }));
+      }, 500);
+    }
+  }, [dispatch, stores, error, loading, success]);
+
+  const submitHandler = (e) => {
+    e.preventDefault();
+    dispatch(
+      addStore({
+        name: name,
+        briefDescription: briefDescription,
+      })
+    );
+  };
   return (
     <>
       <div className="bg-white px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
-        <form action="">
+        <form onSubmit={submitHandler}>
           <div className="mb-7 relative">
             <label htmlFor="name" className="label">
               Store Name
@@ -17,34 +66,43 @@ const AddEditStore = ({ toggleModal }) => {
               id="name"
               placeholder="Enter your store name"
               required
-              value={store}
-              onChange={(e) => setStore(e.target.value)}
+              value={name}
+              onChange={(e) => setName(e.target.value)}
             />
-            {/*{nameError && <span className="form-error">{nameError}</span>}*/}
+            {nameError && <span className="form-error">{nameError}</span>}
           </div>
           <div className="mb-4 relative">
-            <label htmlFor="name" className="label">
+            <label htmlFor="briefDescription" className="label">
               Brief Description
             </label>
             <textarea
-              name="name"
-              id="name"
+              name="briefDescription"
+              id="briefDescription"
               className="ta10em"
               placeholder="Enter a brief description of your store"
               required
-              value={store}
-              onChange={(e) => setStore(e.target.value)}
+              value={briefDescription}
+              onChange={(e) => setBriefDescription(e.target.value)}
             />
-            {/*{nameError && <span className="form-error">{nameError}</span>}*/}
+            {briefDescriptionError && (
+              <span className="form-error" style={{ top: "13em" }}>
+                {briefDescriptionError}
+              </span>
+            )}
           </div>
         </form>
       </div>
-      <div className="bg-gray-50 px-4 py-3 sm:px-6 sm:flex sm:flex-row-reverse">
+      <div className="bg-gray-50 px-4 pt-5 pb-4 sm:p-6 sm:pb-4 sm:flex sm:flex-row-reverse">
         <button
-          type="button"
-          className="w-full inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-green-600 text-base font-medium text-white hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500 sm:ml-3 sm:w-auto sm:text-sm"
+          type="submit"
+          onClick={submitHandler}
+          className="w-full md:w-32 inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-green-600 text-base font-medium text-white hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500 sm:ml-3  sm:text-sm"
         >
-          Add Store
+          {loading ? (
+            <span className="">{spinner}</span>
+          ) : (
+            <span>Add Store</span>
+          )}
         </button>
         <button
           onClick={toggleModal}
