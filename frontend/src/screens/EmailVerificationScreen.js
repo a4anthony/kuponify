@@ -40,7 +40,7 @@ const EmailVerificationScreen = ({ location, history }) => {
           </h5>
           {error ? (
             <span className="error-text">
-              An error occcured. Please try again
+              An error occurred. Please try again
             </span>
           ) : (
             <span>{spinner}</span>

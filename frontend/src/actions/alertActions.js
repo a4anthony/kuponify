@@ -3,7 +3,6 @@ import {
   SET_ALERT,
   SET_ALERT_REQUEST,
 } from "../constants/alertConstants";
-import store from "../store";
 
 export const setAlert = (alert) => (dispatch) => {
   dispatch({

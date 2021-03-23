@@ -27,29 +27,25 @@ import { logout } from "./actions/userActions";
 import store from "./store";
 
 axios.defaults.withCredentials = true;
-// axios.interceptors.response.use(
-//   (next) => {
-//     return Promise.resolve(next);
-//   },
-//   function (error) {
-//     console.log("logout top");
-//     if (error) {
-//       console.log("logout error true");
-//       console.log(error.config);
-//       const originalRequest = error.config;
-//       if (
-//         error.response.status === 401 &&
-//         !originalRequest._retry &&
-//         originalRequest.url !== "/api/cookie/get"
-//       ) {
-//         originalRequest._retry = true;
-//         // store.dispatch(logout());
-//       }
-//
-//       return Promise.reject(error);
-//     }
-//   }
-// );
+axios.interceptors.response.use(
+  (next) => {
+    return Promise.resolve(next);
+  },
+  function (error) {
+    console.log("logout top");
+    if (error) {
+      console.log("logout error true");
+      console.log(error.config);
+      const originalRequest = error.config;
+      if (error.response.status === 401 && !originalRequest._retry) {
+        originalRequest._retry = true;
+        store.dispatch(logout());
+      }
+
+      return Promise.reject(error);
+    }
+  }
+);
 function _ScrollToTop(props) {
   const { pathname } = useLocation();
   useEffect(() => {

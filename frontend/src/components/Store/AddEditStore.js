@@ -41,7 +41,7 @@ const AddEditStore = ({ toggleModal }) => {
         dispatch(setAlert({ msg: "fjfdjnngj" }));
       }, 500);
     }
-  }, [dispatch, stores, error, loading, success]);
+  }, [dispatch, stores, error, loading, success, toggleModal]);
 
   const submitHandler = (e) => {
     e.preventDefault();

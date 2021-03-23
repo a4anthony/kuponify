@@ -23,7 +23,7 @@ const StoresScreen = () => {
     if (loading) {
       dispatch(getStores());
     }
-  }, [loading]);
+  }, [loading, dispatch]);
 
   return (
     <>
@@ -46,7 +46,11 @@ const StoresScreen = () => {
           </div>
           <div className="max-w-xl mx-auto my-10 bg-white py-5 rounded-none md:rounded-md shadow-sm">
             <div className="mx-5 my-7 md:mx-7 text-center">
-              {loading ? (
+              {error ? (
+                <span className="error-text">
+                  An error occurred. Please try again
+                </span>
+              ) : loading ? (
                 <span className="">{spinner}</span>
               ) : stores.stores.length === 0 ? (
                 <>

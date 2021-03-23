@@ -10,7 +10,7 @@ const mailIcon = <FontAwesomeIcon icon={faEnvelope} />;
 
 const Footer = () => {
   return (
-    <footer>
+    <footer className="mt-20">
       <div
         className="container mx-auto py-12 text-white"
         style={{ borderTop: "1px solid", borderColor: "#b5b1b1" }}

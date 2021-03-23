@@ -35,6 +35,16 @@ const userSchema = mongoose.Schema(
       required: true,
       default: true,
     },
+    subscription: {
+      type: String,
+      required: true,
+      default: "active",
+    },
+    plan: {
+      type: String,
+      required: true,
+      default: "free",
+    },
     emailVerifiedAt: {
       type: Date,
       required: false,

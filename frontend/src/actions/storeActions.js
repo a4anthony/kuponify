@@ -40,7 +40,7 @@ export const addStore = (store) => async (dispatch) => {
   }
 };
 
-export const getStores = (stores) => async (dispatch) => {
+export const getStores = () => async (dispatch) => {
   try {
     dispatch({
       type: STORE_GET_REQUEST,
@@ -48,6 +48,7 @@ export const getStores = (stores) => async (dispatch) => {
     const user = await axios.get("/api/cookie/get", {
       withCredentials: true,
     });
+
     const config = {
       headers: {
         "Content-Type": "application/json",

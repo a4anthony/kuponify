@@ -1,5 +1,5 @@
 import { useDispatch, useSelector } from "react-redux";
-import { login, register } from "../actions/userActions";
+import { register } from "../actions/userActions";
 import FormContainer from "../components/Containers/FormContainer";
 import { Link } from "react-router-dom";
 import { useEffect, useState } from "react";

@@ -10,7 +10,9 @@ const PrivateRoute = ({ component, path, exact, auth }) => {
   console.log(auth);
   if (auth && !user) {
     return <Redirect to="/login" />;
-  } else {
+  }
+
+  if (auth && user) {
     return <Route path={path} exact={exact} component={component} />;
   }
 

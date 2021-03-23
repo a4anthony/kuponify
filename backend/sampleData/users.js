@@ -27,6 +27,8 @@ function createUser() {
       isAdmin: bool[getRandomIntInclusive(0, 1)],
       isActive: true,
       emailVerifiedAt: null,
+      subscription: "active",
+      plan: "free",
     });
   }
   return users;
